@@ -1,11 +1,11 @@
 import React from 'react';
 import { Textfield, Button, Grid, Cell, Layout, Navigation, Header} from 'react-mdl';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import firebase, { auth } from '../../firebase.js';
 import HomePage from '../HomePage/HomePage';
 import './LoginPage.css';
+import LandingPage from '../LandingPage/LandingPage.js';
 require('firebase/auth');
-
 const txtUsername = document.getElementById("txtUsername");
 const txtPassword = document.getElementById("txtPassword");
 const btnLogin = document.getElementById("btnLogin");
@@ -32,23 +32,15 @@ class LoginPage extends React.Component{
         promise.catch(e => document.getElementById("error-message").innerText = e.message);
     }
 
-    // signup(){
-    //     // const promise = auth.createUserWithEmailAndPassword(this.state.txtUsername, this.state.txtPassword);
-    //     // promise.catch(e => document.getElementById("error-message").innerText = e.message);
-    //     window.location.pathname = "/signup";
-
-    // }
-
-    // signout(){
-    //     auth.signOut();
-    // }
 
     componentDidMount(){
         auth.onAuthStateChanged(firebaseUser => {
             if(firebaseUser){
                 console.log(firebaseUser);
-                // document.getElementById("btnSignout").style.display = 'block';
+               
                 //window.location.pathname = "https://rhododendron-show.netlify.app/landingpage";
+                
+                this.props.history.push('/landingpage');
             }
             else{
                 console.log("not logged in");
