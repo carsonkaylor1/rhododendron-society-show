@@ -86,7 +86,7 @@ class LoginPage extends React.Component{
                     <Cell col={12}>
                         <div className="login-header">
                             <h2 style={{marginBottom: '50px', fontFamily: 'Merriweather serif', textDecoration: 'underline'}}>MASON DIXON CHAPTER</h2>
-                            <h1 style={{fontFamily: 'Merriweather serif'}}>Rhododendron & Azalea Truss Show</h1>
+                            <h1 style={{fontFamily: 'Merriweather serif'}}>2020 Rhododendron & Azalea Truss Show</h1>
                             <img src='https://scholar.lib.vt.edu/ejournals/JARS/logo.gif'/>
                         </div>
                     </Cell>
