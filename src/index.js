@@ -5,7 +5,7 @@ import App from './components/App/App';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import * as serviceWorker from './serviceWorker';
-import {HashRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 require('dotenv').config();
 
 
@@ -23,9 +23,9 @@ require('dotenv').config();
 // firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter>
     <App />
-  </HashRouter>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change

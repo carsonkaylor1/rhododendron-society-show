@@ -1,9 +1,9 @@
 import React from 'react';
-import { Textfield, Button, Grid, Cell, Layout, Navigation, Header, Link } from 'react-mdl';
+import { Textfield, Button, Grid, Cell, Layout, Navigation, Header} from 'react-mdl';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import firebase, { auth } from '../../firebase.js';
 import HomePage from '../HomePage/HomePage';
 import './LoginPage.css';
-import { Router } from 'react-router-dom';
 require('firebase/auth');
 
 const txtUsername = document.getElementById("txtUsername");
@@ -28,12 +28,6 @@ class LoginPage extends React.Component{
     }
 
     login(){
-        // const username = txtUsername.value;
-        // const password = txtPassword.value;
-        console.log(this.state.txtUsername);
-        console.log(this.state.txtPassword);
-
-        
         const promise = auth.signInWithEmailAndPassword(this.state.txtUsername, this.state.txtPassword);
         promise.catch(e => document.getElementById("error-message").innerText = e.message);
     }
@@ -77,7 +71,8 @@ class LoginPage extends React.Component{
             <Layout>
                 <Header title=' ' id='header-bar' scroll>
                     <Navigation>
-                        <a href='/signup'>Sign Up</a>
+                        <Link to='/signup'>Sign Up</Link>
+                        {/* <a href='/signup'></a> */}
                     </Navigation>
                 </Header>
             
