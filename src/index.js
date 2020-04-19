@@ -5,7 +5,9 @@ import App from './components/App/App';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
 require('dotenv').config();
+
 
 // var firebaseConfig = {
 //   apiKey: "AIzaSyAfnY7HaBl0NkqSSSvwxsQkjneTXDqe-DM",
@@ -21,9 +23,9 @@ require('dotenv').config();
 // firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change
