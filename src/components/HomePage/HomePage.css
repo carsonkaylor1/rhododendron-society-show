@@ -1,0 +1,50 @@
+label .upload-group{
+    width: 100px;
+    height: 40px;
+}
+
+#fileButton{
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+    z-index: -1;
+}
+
+.upload-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#button-container{
+    display: flex;
+    justify-content: center;
+}
+
+#uploaded-image-div{
+    display: flex;
+    justify-content: center;
+}
+
+#uploaded-image{
+    max-width: 500px;
+    max-height: 500px;
+}
+
+#post-instructions{
+    display: flex;
+    justify-content: center;
+}
+
+#submit-award{
+    display: block;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+#photo-caption-div{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
