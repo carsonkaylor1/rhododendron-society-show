@@ -36,14 +36,10 @@ class LoginPage extends React.Component{
     componentDidMount(){
         auth.onAuthStateChanged(firebaseUser => {
             if(firebaseUser){
-                console.log(firebaseUser);
-               
-                //window.location.pathname = "https://rhododendron-show.netlify.app/landingpage";
-                
                 this.props.history.push('/landingpage');
             }
             else{
-                console.log("not logged in");
+                
                 // document.getElementById("btnSignout").style.display = 'none';
             }
         })
