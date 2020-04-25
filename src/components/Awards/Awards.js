@@ -129,7 +129,7 @@ class Awards extends React.Component{
 
                 </Header>
                 <h1 style={{fontFamily: 'Merriweather serif', textDecoration: 'underline'}}>Awards</h1>
-                <h3 id='awards-indicator'>No Awards Yet</h3>
+                <h3 id='awards-indicator' style={{fontFamily: 'Merriweather serif'}}>No Awards Yet</h3>
                 <div id='awards-div'>
                 <div id='first-place-div' style={{marginBottom: '100px'}}>
                     <h2 style={{fontFamily: 'Merriweather serif'}}>First Place</h2>
