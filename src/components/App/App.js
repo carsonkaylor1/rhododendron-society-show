@@ -12,6 +12,13 @@ function App() {
       <Content>
         <Main />
       </Content>
+      <div id='footer-div'>  
+        <p>Carson Kaylor Web Solutions</p>
+        <p>240-457-2278</p>
+        <p><a href="mailto:carsonkaylor@gmail.com">
+        carsonkaylor@gmail.com</a></p>
+        <p>carsonkaylor.netlify.com</p>       
+      </div>
       </Layout>
     </Router>
   );
