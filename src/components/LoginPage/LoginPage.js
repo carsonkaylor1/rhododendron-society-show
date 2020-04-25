@@ -97,7 +97,7 @@ class LoginPage extends React.Component{
                     <p id="error-message"></p>
                 </div>
                 <div id="button-container">
-                    <Button id="btnLogin" onClick={this.login} raised colored>Login</Button>
+                    <Button id="btnLogin" onClick={this.login} style={{marginBottom: '25px'}} raised colored>Login</Button>
                     {/* <Button id="btnSignout" onClick={this.signout} raised accent colored style={{display:'none'}}>Sign Out</Button> */}
                 </div>
                 

@@ -55,6 +55,7 @@ class HomePage extends React.Component{
         // Get file
         file = e.target.files[0];
         fileId = `image${file.name}`
+        document.getElementById('image-upload-text').innerHTML = fileId
         console.log(fileId);
         // Create a storage ref
         
@@ -278,6 +279,9 @@ else{
                     {/* <input id="fileButton" className="upload-group" type="file" value="" onChange={this.getFile}></input> */}
                     <input id="fileButton" className="upload-group" type="file" value="" onChange={this.getFile}></input>
                 </label>
+                </div>
+                <div>
+                    <p id='image-upload-text'></p>
                 </div>
                 <div className='upload-div'>
                 <input id="input-plant-name" type="text" placeholder="Enter Name of Plant" style={{width: '500px'}}></input>
