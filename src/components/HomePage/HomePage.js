@@ -231,6 +231,7 @@ else{
                 <div id='full-upload-div'>
                 <div>
                     <h4 style={{fontFamily: 'Merriweather serif'}}>Please only submit one photo of each plant.</h4>
+                    <h4 style={{fontFamily: 'Merriweather serif'}}>Please limit yourself to a total of 10 submissions for this show. </h4>
                 </div>
                 <div id='post-instructions'>
                     <ol style={{textAlign: 'left'}}>
