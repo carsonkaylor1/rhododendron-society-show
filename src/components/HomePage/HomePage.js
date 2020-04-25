@@ -273,7 +273,7 @@ else{
                 <div id='upload-section'>
                 <div className='upload-div'>
                 {/* <progress id="uploader" value="0" max="100" >0%</progress> */}
-                <label className="upload-group">
+                <label className="upload-group" style={{color:'blue', textDecoration:'underline'}}>
                     Upload File
                     {/* <input id="fileButton" className="upload-group" type="file" value="" onChange={this.getFile}></input> */}
                     <input id="fileButton" className="upload-group" type="file" value="" onChange={this.getFile}></input>

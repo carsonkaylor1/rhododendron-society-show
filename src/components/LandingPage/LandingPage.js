@@ -168,7 +168,10 @@ class LandingPage extends React.Component{
     }
 
     goToHome(){
-        this.props.history.push('/landingpage');
+        console.log(this.state.category)
+        // document.getElementById('photo-div').style.display = 'none';
+        // document.getElementById("category-page").style.display='block';
+        // document.getElementById("homepage-div").style.display='none';
     }
     
 
@@ -178,6 +181,7 @@ class LandingPage extends React.Component{
                 
                 <Layout >
                 <Header title=' ' id='header-bar' scroll style={{backgroundImage: 'url(https://www.whiteflowerfarm.com/mas_assets/cache/image/3/9/c/d/14797.Jpg)'}}>
+                {/* <Button id="back" onClick={this.goToHome} style={{display:'block', color: 'white'}}>Home</Button> */}
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
                 </Header>
                 <div id='admin-form' class='admin'>

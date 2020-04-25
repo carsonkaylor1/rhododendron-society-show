@@ -17,7 +17,7 @@ function App() {
         <p>240-457-2278</p>
         <p><a href="mailto:carsonkaylor@gmail.com">
         carsonkaylor@gmail.com</a></p>
-        <p>carsonkaylor.netlify.com</p>       
+        <p><a href="https://carson-kaylor.netlify.app/" rel='noopener noreferrer' target='_blank'>carsonkaylor.netlify.com</a></p>       
       </div>
       </Layout>
     </Router>
