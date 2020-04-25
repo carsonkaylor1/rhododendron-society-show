@@ -31,7 +31,6 @@ class LandingPage extends React.Component{
     }
 
     setup(user){
-        console.log('setting up ui');
         if(user){
             if(user.admin){
                 adminItems.forEach(item => item.style.display = 'block')
@@ -43,12 +42,10 @@ class LandingPage extends React.Component{
     }
 
     checkAuth(){
-        console.log('checking auth');
         auth.onAuthStateChanged(function(user){
             if(user){
                 user.getIdTokenResult().then(idTokenResult => {
                     user.admin = idTokenResult.claims.admin;
-                    console.log(user.admin);
                     if(user.admin){
                         const adminItems = document.querySelectorAll('.admin');
                         adminItems.forEach(item => item.style.display = 'block');
@@ -64,7 +61,6 @@ class LandingPage extends React.Component{
                 
             }
             else{
-                console.log('user is not signed in');
                 window.location.pathname = "/";
             }
             
@@ -89,7 +85,6 @@ class LandingPage extends React.Component{
 
     
     loadCategoryPage(category, categoryName, displayPhotos){
-        console.log(category)
         this.setState({
             category: category,
             categoryName: categoryName,
@@ -113,12 +108,9 @@ class LandingPage extends React.Component{
     }
 
     queryDatabase(category){
-        console.log("query database");
-        console.log(category);
         database.ref('/' + category + '/').once('value').then(function(snapshot){
             var postArray = snapshot.val();
-            if(postArray){
-                console.log(postArray);
+            if(postArray){;
                 var keys = Object.keys(postArray);
                 for (var i=0; i<keys.length; i++){
                     var currentObject = postArray[keys[i]];
@@ -165,19 +157,16 @@ class LandingPage extends React.Component{
             isEmptyPhotoState: false,
             isPhotoState: true
         })
-        console.log("state category: " + this.state.category)
         document.getElementById('photo-div').style.display = 'block';
 
     }
 
     signout(){
-        console.log("sign out");
         auth.signOut();
         window.location.pathname = "/";
     }
 
     goToHome(){
-        console.log(this.state.category)
         document.getElementById("photo-caption-div").innerHTML = '';
         document.getElementById('photo-div').style.display = 'none';
         document.getElementById("category-page").style.display='block';
@@ -195,12 +184,12 @@ class LandingPage extends React.Component{
                     <Button id="back" onClick={this.goToHome} style={{display:'block', color: 'white'}}>Home</Button>
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
                 </Header>
-                <div id='admin-form' class='admin'>
-                <form class='admin-actions admin' style={{marginTop: '50px', display:'none'}}>
+                <div id='admin-form' className='admin'>
+                <form className='admin-actions admin' style={{marginTop: '50px', display:'none'}}>
                     <input type='email' placeholder='User email' id='admin-email' required/>
                     <button>Make admin</button>
                 </form>
-                <div class='admin' style={{marginTop: '25px'}}>
+                <div className='admin' style={{marginTop: '25px'}}>
                     <p id='admin-success'></p>
                 </div>
                 </div>

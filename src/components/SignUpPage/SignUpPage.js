@@ -35,7 +35,6 @@ class SignUpPage extends React.Component{
     }
 
     handleTermChange(event){
-        console.log("term change");
         this.setState({
             [event.target.id]: event.target.value
         });

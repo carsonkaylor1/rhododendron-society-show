@@ -36,23 +36,16 @@ class HomePage extends React.Component{
     componentDidMount(){
         uploader = document.getElementById("uploader");
         this.props.checkAuth();
-        // const adminItems = document.querySelectorAll('.admin');
-        // adminItems.forEach(item => item.style.display = 'none');
-        if(this.props.displayPhotos){
-            console.log("viewing photos");
-            //this.props.queryDB();
-            
+        if(this.props.displayPhotos){           
         }
     }
 
     viewPhotos(){
         document.getElementById("view-photos").style.display='none';
         document.getElementById("full-upload-div").style.display='none';
-        console.log('admin' + this.props.admin)
         if(this.props.admin){
             document.getElementById("submit-award").style.display='block';  
         }
-        // document.getElementById("submit-award").style.display='block';
         this.props.viewPics();
     }
 
@@ -62,9 +55,6 @@ class HomePage extends React.Component{
         file = e.target.files[0];
         fileId = `image${file.name}`
         document.getElementById('image-upload-text').innerHTML = fileId
-        console.log(fileId);
-        // Create a storage ref
-        
     }
 
     uploadFile(){
@@ -73,26 +63,18 @@ class HomePage extends React.Component{
         {
 
         
-        console.log("upload " + this.props.category)
+        
         try{
             var storageRef = storage.ref(this.props.category + '/' + file.name);
-        
-        
-        
+            // Upload file
+            var task = storageRef.put(file);
 
-        // Upload file
-        var task = storageRef.put(file);
-
-        // Update progress bar
-        task.on('state_changed',
-        
-        function progress(snapshot){
-
-
-
+            // Update progress bar
+            task.on('state_changed',       
+            function progress(snapshot){
             percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             var roundedPercentage = Math.round(percentage * 10) / 10;
-            console.log(percentage);
+           
             // percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
            // if(uploader.value!=null){
             //    uploader.value = percentage;
@@ -107,7 +89,6 @@ class HomePage extends React.Component{
         function complete(){
             var awardsInDB = false;
             database.ref('/' + this.props.category + '/awards').once('value', function(snapshot){
-                console.log('award children ' + snapshot.numChildren());
                 if(snapshot.numChildren() > 0){
                     awardsInDB = true;
                 }
@@ -118,11 +99,7 @@ class HomePage extends React.Component{
             
 
             database.ref('/' + this.props.category + '/').once('value', function(snapshot) {
-
-                console.log('num children');
-                console.log(snapshot.numChildren());
                 const numberOfChildren = (snapshot.numChildren());
-                console.log('number of children' + numberOfChildren)
                 if(awardsInDB){
                     this.setState({
                         numChildren: (numberOfChildren-1)
@@ -138,7 +115,7 @@ class HomePage extends React.Component{
             }.bind(this))
             storage.ref(this.props.category).child(file.name).getDownloadURL().then(imgUrl => {
 
-                console.log(`${imgUrl}`);
+                
                 var postKey = database.ref('/' + this.props.category + '/').push().key;
 
                
@@ -150,8 +127,6 @@ class HomePage extends React.Component{
                     name: document.getElementById("input-user-name").value,
                     award: 'none'
                 }
-                console.log("complete " + this.props.category);
-                console.log(postKey)
                 updates['/' + this.props.category + '/' + postData.id] = postData;
                 firebase.database.ref().update(updates);
 
@@ -161,7 +136,6 @@ class HomePage extends React.Component{
         );
     }
     catch{  
-        console.log('no image uploaded');
         var errorMessage = document.createElement('p')
         errorMessage.innerHTML = 'Not all information has been entered';
         document.getElementById('plant-upload').append(errorMessage);
@@ -195,8 +169,6 @@ class HomePage extends React.Component{
         document.getElementById('award-success-message').innerHTML = 'Awards Submitted';
 
         database.ref('/' + this.props.category + '/').once('value', function(snapshot) {
-            console.log('num children');
-            console.log(snapshot.numChildren());
             numChildren = snapshot.numChildren();
         })
         
@@ -204,16 +176,12 @@ class HomePage extends React.Component{
 
         
         database.ref('/' + this.props.category + '/' + awardData.first).once('value').then(function(snapshot){
-            firstPlaceName = snapshot.val();
-                     
-            console.log(firstPlaceName);
+            firstPlaceName = snapshot.val();                    
             var postData ={
                 id: awardData.first,
                 author: firstPlaceName
             }
             var newPostKey = database.ref('/' + category + '/').push().key;
-            console.log('new post key ' + newPostKey);
-            //console.log(firstPlace.val);
             var updates = {};
             updates['/' + category + '/awards/first/' + 'winner/'] = postData;
             database.ref().update(updates);
@@ -223,14 +191,11 @@ class HomePage extends React.Component{
     if(awardData.second >= 0){
         database.ref('/' + this.props.category + '/' + awardData.second).once('value').then(function(snapshot){
             secondPlaceName = snapshot.val();
-            console.log(secondPlaceName);
             var postData ={
                 id: awardData.second,
                 author: secondPlaceName
             }
             var newPostKey = database.ref('/' + category + '/').push().key;
-            console.log('new post key ' + newPostKey);
-            //console.log(firstPlace.val);
             var updates = {};
             updates['/' + category + '/awards/second/' + 'winner/'] = postData;
             database.ref().update(updates);
@@ -239,14 +204,11 @@ class HomePage extends React.Component{
         if(awardData.third >= 0){
         database.ref('/' + this.props.category + '/' + awardData.third).once('value').then(function(snapshot){
             thirdPlaceName = snapshot.val();
-            console.log(secondPlaceName);
             var postData ={
                 id: awardData.third,
                 author: thirdPlaceName
             }
             var newPostKey = database.ref('/' + category + '/').push().key;
-            console.log('new post key ' + newPostKey);
-            //console.log(firstPlace.val);
             var updates = {};
             updates['/' + category + '/awards/third/' + 'winner/'] = postData;
             database.ref().update(updates);
@@ -265,7 +227,7 @@ else{
                 {this.setup}
                 <Layout>
                
-                <h1 style={{fontFamily: 'Merriweather serif'}}>{this.props.categoryName}</h1>
+                <h1 style={{fontFamily: 'Merriweather serif'}}>{this.props.categoryName} Entries</h1>
                 <div id='full-upload-div'>
                 <div>
                     <h4 style={{fontFamily: 'Merriweather serif'}}>Please only submit one photo of each plant.</h4>
@@ -304,7 +266,7 @@ else{
                 </div>
                 </div>
                 <br/>
-                <div id='uploaded-image-div'>
+                <div id='uploaded-image-div'  style={{marginBottom: '25px'}}>
                 <img id='uploaded-image' src={this.state.url}/>
                 </div>
                 </div>

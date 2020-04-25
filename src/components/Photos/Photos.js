@@ -16,28 +16,20 @@ class Photos extends React.Component{
 
     getPhotos(){
         var that = this;
-        console.log("getting photos");
         // Create a reference under which you want to list
         var listRef = storage.ref().child(this.props.category);
-        console.log("category: " + this.props.category);
 
         // Find all the prefixes and items.
         listRef.listAll().then(function(res) {
 
 
         res.prefixes.forEach(function(folderRef) {
-        // All the prefixes under listRef.
-        // You may call listAll() recursively on them.
-        //console.log(folderRef.location.path_)
         });
 
 
         res.items.forEach(function(itemRef) {
         // All the items under listRef.
         itemRef.getDownloadURL().then(imgUrl => {
-            //console.log(`${imgUrl}`);
-            //console.log("photos")
-            //console.log(imgUrl);
             that.setState(state => {
                 const url = state.url.concat(imgUrl);
 
@@ -54,15 +46,11 @@ class Photos extends React.Component{
 
 
         }).catch(function(error) {
-        // Uh-oh, an error occurred!
+
         });
         
-        //console.log(this.state.url)
     }
 
-    // componentDidMount(){
-    //     this.getPhotos();
-    // }
 
     render(){
         return(

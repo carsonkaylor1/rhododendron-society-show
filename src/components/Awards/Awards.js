@@ -15,7 +15,6 @@ class Awards extends React.Component{
 
     componentDidMount(){
         const { category } = this.props.location.state;
-        console.log(category);
         this.queryDatabase(category);
     }
 
@@ -66,7 +65,6 @@ class Awards extends React.Component{
         });
         database.ref('/' + category + '/awards/second/winner/').once('value').then(function(snapshot){
             var currentObject = snapshot.val();
-            console.log('curr object ' + currentObject)
             if(currentObject){
             if(currentObject.author)
             {
