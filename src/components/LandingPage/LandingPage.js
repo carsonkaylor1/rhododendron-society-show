@@ -176,9 +176,7 @@ class LandingPage extends React.Component{
                 
                 <Layout >
                 <Header title=' ' id='header-bar' scroll style={{backgroundImage: 'url(https://www.whiteflowerfarm.com/mas_assets/cache/image/3/9/c/d/14797.Jpg)'}}>
-                    <Button id="back" onClick={this.back} style={{display:'block', color: 'white'}}>Back</Button>
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
-
                 </Header>
                 <div id='admin-form' class='admin'>
                 <form class='admin-actions admin' style={{marginTop: '50px', display:'none'}}>
