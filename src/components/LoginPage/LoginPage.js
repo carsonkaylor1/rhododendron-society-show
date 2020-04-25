@@ -22,8 +22,7 @@ class LoginPage extends React.Component{
         };
 
         this.login = this.login.bind(this);
-        // this.signup = this.signup.bind(this);
-        // this.signout = this.signout.bind(this);
+        this.resetPassword = this.resetPassword.bind(this);
         this.handleTermChange = this.handleTermChange.bind(this);
     }
 
@@ -32,6 +31,15 @@ class LoginPage extends React.Component{
         promise.catch(e => document.getElementById("error-message").innerText = e.message);
     }
 
+    resetPassword(){
+        var emailAddress = this.state.txtUsername;
+
+        auth.sendPasswordResetEmail(emailAddress).then(function() {
+            document.getElementById('reset-message').innerHTML = 'Email sent to: ' + emailAddress;
+        }).catch(function(error) {
+        document.getElementById('reset-message').innerHTML = 'Please enter valid email address';
+        });
+    }
 
     componentDidMount(){
         auth.onAuthStateChanged(firebaseUser => {
@@ -46,7 +54,6 @@ class LoginPage extends React.Component{
     }
 
     handleTermChange(event){
-        console.log("term change");
         this.setState({
             [event.target.id]: event.target.value
         });
@@ -97,9 +104,15 @@ class LoginPage extends React.Component{
                     <p id="error-message"></p>
                 </div>
                 <div id="button-container">
+                    <div>
                     <Button id="btnLogin" onClick={this.login} style={{marginBottom: '25px'}} raised colored>Login</Button>
+                    </div>
                     {/* <Button id="btnSignout" onClick={this.signout} raised accent colored style={{display:'none'}}>Sign Out</Button> */}
                 </div>
+                <div>
+                    <Button id="btnReset" onClick={this.resetPassword} style={{marginBottom: '25px'}} raised colored>Reset Password</Button>
+                </div>
+                <div id='reset-message'></div>
                 
             </div>
             </Layout>
