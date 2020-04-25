@@ -46,6 +46,7 @@ class HomePage extends React.Component{
     viewPhotos(){
         document.getElementById("view-photos").style.display='none';
         document.getElementById("full-upload-div").style.display='none';
+        document.getElementById("submit-award").style.display='block';
         this.props.viewPics();
     }
 
@@ -97,15 +98,35 @@ class HomePage extends React.Component{
         },
 
         function complete(){
+            var awardsInDB = false;
+            database.ref('/' + this.props.category + '/awards').once('value', function(snapshot){
+                console.log('award children ' + snapshot.numChildren());
+                if(snapshot.numChildren() > 0){
+                    awardsInDB = true;
+                }
+                else{
+                    awardsInDB = false;
+                }
+            });
+            
+
             database.ref('/' + this.props.category + '/').once('value', function(snapshot) {
 
                 console.log('num children');
                 console.log(snapshot.numChildren());
-                const numberOfChildren = snapshot.numChildren();
+                const numberOfChildren = (snapshot.numChildren());
+                console.log('number of children' + numberOfChildren)
+                if(awardsInDB){
+                    this.setState({
+                        numChildren: (numberOfChildren-1)
+                    })
+                }
+                else{
+                    this.setState({
+                        numChildren: (numberOfChildren)
+                    })
+                }
                 
-                this.setState({
-                    numChildren: numberOfChildren
-                })
                 
             }.bind(this))
             storage.ref(this.props.category).child(file.name).getDownloadURL().then(imgUrl => {
@@ -152,15 +173,32 @@ class HomePage extends React.Component{
         var firstPlaceName;
         var secondPlaceName;
         var thirdPlaceName;
+        var firstPlaceValue = document.getElementById("input-first-place").value
+        var secondPlaceValue = document.getElementById("input-second-place").value
+        var thirdPlaceValue = document.getElementById("input-third-place").value
+        var numChildren;
         var category = this.props.category;
+        if(firstPlaceValue && secondPlaceValue && thirdPlaceValue){
         var awardData = {
             first: document.getElementById("input-first-place").value,
             second: document.getElementById("input-second-place").value,
             third: document.getElementById("input-third-place").value
         }
+        document.getElementById('submit-award-button').style.display = 'none';
+        document.getElementById('award-success-message').innerHTML = 'Awards Submitted';
+
+        database.ref('/' + this.props.category + '/').once('value', function(snapshot) {
+            console.log('num children');
+            console.log(snapshot.numChildren());
+            numChildren = snapshot.numChildren();
+        })
+        
+        if(awardData.first >= 0){
+
         
         database.ref('/' + this.props.category + '/' + awardData.first).once('value').then(function(snapshot){
             firstPlaceName = snapshot.val();
+                     
             console.log(firstPlaceName);
             var postData ={
                 id: awardData.first,
@@ -172,8 +210,10 @@ class HomePage extends React.Component{
             var updates = {};
             updates['/' + category + '/awards/first/' + 'winner/'] = postData;
             database.ref().update(updates);
+
         });
-       
+    }
+    if(awardData.second >= 0){
         database.ref('/' + this.props.category + '/' + awardData.second).once('value').then(function(snapshot){
             secondPlaceName = snapshot.val();
             console.log(secondPlaceName);
@@ -188,7 +228,8 @@ class HomePage extends React.Component{
             updates['/' + category + '/awards/second/' + 'winner/'] = postData;
             database.ref().update(updates);
         });
-
+    }
+        if(awardData.third >= 0){
         database.ref('/' + this.props.category + '/' + awardData.third).once('value').then(function(snapshot){
             thirdPlaceName = snapshot.val();
             console.log(secondPlaceName);
@@ -204,6 +245,12 @@ class HomePage extends React.Component{
             database.ref().update(updates);
         });
     }
+}
+else{
+    document.getElementById('award-error-message').innerHTML = 'Must Enter ID for all awards';
+}
+    }
+    
 
     render(){
         return(
@@ -259,13 +306,27 @@ class HomePage extends React.Component{
                 </div>
                 <div id='submit-award' className='admin'>
                     <h3 style={{fontFamily: 'Merriweather serif'}}>Select ID of winners</h3>
-                    <input id="input-first-place" type="text" placeholder="Enter First Place Winner ID" style={{width: '500px'}}></input>
-                    <input id="input-second-place" type="text" placeholder="Enter Second Place Winner ID" style={{width: '500px', marginLeft: '5%'}}></input>
-                    <input id="input-third-place" type="text" placeholder="Enter Third Place Winner ID" style={{width: '500px', marginLeft: '5%'}}></input>
+                    <p>Please do not submit awards until after entry period is over.</p>
+                    <input id="input-first-place" type="text" placeholder="Enter First Place Winner ID" style={{width: '250px', marginTop:'25px'}}></input>
+                    <input id="input-second-place" type="text" placeholder="Enter Second Place Winner ID" style={{width: '250px', marginLeft: '5%', marginTop:'25px'}}></input>
+                    <input id="input-third-place" type="text" placeholder="Enter Third Place Winner ID" style={{width: '250px', marginLeft: '5%', marginTop:'25px'}}></input>
                     <div style={{marginTop: '25px'}}>
                         <Button id="submit-award-button" raised primary colored style={{width:'150px'}} onClick={this.modifyAwardValue}>SUBMIT AWARDS</Button>
                     </div>
+                    <div >
+                        <p id='award-success-message'></p>
+                    </div>
+                    <div>
+                        <p id='award-error-message'></p>
+                    </div>
                 </div>
+                {/* <div id='footer-div-home'>  
+                    <p>Carson Kaylor Web Solutions</p>
+                    <p>240-457-2278</p>
+                    <p><a href="mailto:carsonkaylor@gmail.com">
+                    carsonkaylor@gmail.com</a></p>
+                    <p>carsonkaylor.netlify.com</p>       
+                </div> */}
                 </Layout>
             </div>
         )

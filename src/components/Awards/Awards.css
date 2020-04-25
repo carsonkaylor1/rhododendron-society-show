@@ -1,10 +1,5 @@
-#categories-grid{
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-#footer-div{
-    position: relative;
+#footer-div-awards{
+    position: fixed;
     bottom: 0px;
     right: 0px;
     display: flex;

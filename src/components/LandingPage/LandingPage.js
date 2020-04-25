@@ -73,8 +73,8 @@ class LandingPage extends React.Component{
         const adminEmail = document.querySelector('#admin-email').value;
         const addAdminRole = functions.httpsCallable('addAdminRole');
         addAdminRole({email: adminEmail}).then(result => {  // {email: adminEmail} represents 'data' object in addAdminRole function
-        console.log(result);
         }) 
+        document.getElementById('admin-success').innerHTML = (adminEmail + ' is now an admin');
     })
        
     }
@@ -89,9 +89,14 @@ class LandingPage extends React.Component{
         })
         document.getElementById("category-page").style.display='none';
         document.getElementById("homepage-div").style.display='block';
+        // document.getElementById("footer-div").style.display='none';
+        document.getElementById("admin-form").style.display='none'
         if(displayPhotos){
             document.getElementById("full-upload-div").style.display='none';
             this.queryDatabase(category);
+        }
+        else{
+            document.getElementById("submit-award").style.display='none';
         }
      
         
@@ -113,8 +118,8 @@ class LandingPage extends React.Component{
                     var p = document.createElement("p");
                     var div = document.createElement("div");
                     image.src = currentObject.url;
-                    image.style.maxWidth = '750px';
-                    image.style.maxHeight = '750px';
+                    image.style.width = '750px';
+                    image.style.maxHeight = '1500px';
                     id.innerHTML = ('ID: ' + currentObject.id);
                     p.innerHTML = ('Plant name: ' + currentObject.caption);
                     p.style.fontSize = '22px';
@@ -125,7 +130,7 @@ class LandingPage extends React.Component{
                     div.append(p);
                     div.append(id);
                    
-                    if(currentObject.id){
+                    if(currentObject.id >= 0){
                         document.getElementById("photo-caption-div").append(div);
                         // document.getElementById("photo-caption-div").append(id);
                         // document.getElementById("photo-caption-div").append(p);
@@ -143,9 +148,6 @@ class LandingPage extends React.Component{
         })
     }
 
-    loadAwards(){
-        
-    }
 
     viewPhotos(){
         this.queryDatabase(this.state.category);
@@ -174,20 +176,24 @@ class LandingPage extends React.Component{
                 
                 <Layout >
                 <Header title=' ' id='header-bar' scroll style={{backgroundImage: 'url(https://www.whiteflowerfarm.com/mas_assets/cache/image/3/9/c/d/14797.Jpg)'}}>
-                    {/* <Button id="back" onClick={this.back} style={{display:'block', color: 'white'}}>Back</Button> */}
+                    <Button id="back" onClick={this.back} style={{display:'block', color: 'white'}}>Back</Button>
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
 
                 </Header>
+                <div id='admin-form' class='admin'>
                 <form class='admin-actions admin' style={{marginTop: '50px', display:'none'}}>
                     <input type='email' placeholder='User email' id='admin-email' required/>
                     <button>Make admin</button>
                 </form>
-                
+                <div class='admin' style={{marginTop: '25px'}}>
+                    <p id='admin-success'></p>
+                </div>
+                </div>
                 <div id='category-page'>
                 <Grid>
                     <Cell col={12}>
                         <div className="category-header">
-                            <h1 style={{fontFamily: 'Merriweather serif', marginTop:'50px'}}>Choose Entry Category</h1>
+                            <h1 style={{fontFamily: 'Merriweather serif'}}>Choose Entry Category</h1>
                         </div>
                     </Cell>
                 </Grid>
@@ -410,6 +416,13 @@ class LandingPage extends React.Component{
                     <div id="homepage-div" style={{display: 'none'}}>
                     <HomePage category={this.state.category} categoryName={this.state.categoryName} displayPhotos={this.state.displayPhotos} queryDB={this.queryDatabase} viewPics={this.viewPhotos} setup={this.setup} admin={this.state.admin} checkAuth={this.checkAuth}/>
                     </div>
+                    {/* <div id='footer-div'>  
+                        <p>Carson Kaylor Web Solutions</p>
+                        <p>240-457-2278</p>
+                        <p><a href="mailto:carsonkaylor@gmail.com">
+                        carsonkaylor@gmail.com</a></p>
+                        <p>carsonkaylor.netlify.com</p>       
+                    </div> */}
                 </Layout>
             </div>
         )
