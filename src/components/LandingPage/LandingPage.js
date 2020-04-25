@@ -27,6 +27,7 @@ class LandingPage extends React.Component{
         this.viewPhotos = this.viewPhotos.bind(this);
         this.setup = this.setup.bind(this);
         this.goToHome = this.goToHome.bind(this);
+        this.checkAuth = this.checkAuth.bind(this);
     }
 
     setup(user){
@@ -34,6 +35,9 @@ class LandingPage extends React.Component{
         if(user){
             if(user.admin){
                 adminItems.forEach(item => item.style.display = 'block')
+                this.setState({
+                    admin: true
+                })
             }
         }
     }
@@ -48,6 +52,9 @@ class LandingPage extends React.Component{
                     if(user.admin){
                         const adminItems = document.querySelectorAll('.admin');
                         adminItems.forEach(item => item.style.display = 'block');
+                        this.setState({
+                            admin: true
+                        })
                     }
                     else{
                         const adminItems = document.querySelectorAll('.admin');
@@ -62,7 +69,7 @@ class LandingPage extends React.Component{
             }
             
             
-        })
+        }.bind(this))
     }
 
     componentDidMount(){

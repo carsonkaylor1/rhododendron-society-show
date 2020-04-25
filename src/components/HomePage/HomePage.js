@@ -13,6 +13,8 @@ var percentage = 0;
 var file;
 var fileId;
 
+const adminItems = document.querySelectorAll('.admin');
+
 class HomePage extends React.Component{
 
     constructor(props){
@@ -24,11 +26,11 @@ class HomePage extends React.Component{
             isEmptyPhotoState: true,
             numChildren: 0
         }
-
+ 
         this.getFile = this.getFile.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
         this.viewPhotos = this.viewPhotos.bind(this);
-        this.modifyAwardValue = this.modifyAwardValue.bind(this);      
+        this.modifyAwardValue = this.modifyAwardValue.bind(this);          
     }
 
     componentDidMount(){
@@ -46,7 +48,11 @@ class HomePage extends React.Component{
     viewPhotos(){
         document.getElementById("view-photos").style.display='none';
         document.getElementById("full-upload-div").style.display='none';
-        document.getElementById("submit-award").style.display='block';
+        console.log('admin' + this.props.admin)
+        if(this.props.admin){
+            document.getElementById("submit-award").style.display='block';  
+        }
+        // document.getElementById("submit-award").style.display='block';
         this.props.viewPics();
     }
 
@@ -256,6 +262,7 @@ else{
     render(){
         return(
             <div className="container">
+                {this.setup}
                 <Layout>
                
                 <h1 style={{fontFamily: 'Merriweather serif'}}>{this.props.categoryName}</h1>
