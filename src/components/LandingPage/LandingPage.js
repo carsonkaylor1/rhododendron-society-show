@@ -104,6 +104,8 @@ class LandingPage extends React.Component{
             this.queryDatabase(category);
         }
         else{
+            document.getElementById("full-upload-div").style.display='block';
+            document.getElementById("homepage-div").style.display = 'block';
             document.getElementById("submit-award").style.display='none';
         }
      
@@ -176,9 +178,10 @@ class LandingPage extends React.Component{
 
     goToHome(){
         console.log(this.state.category)
-        // document.getElementById('photo-div').style.display = 'none';
-        // document.getElementById("category-page").style.display='block';
-        // document.getElementById("homepage-div").style.display='none';
+        document.getElementById("photo-caption-div").innerHTML = '';
+        document.getElementById('photo-div').style.display = 'none';
+        document.getElementById("category-page").style.display='block';
+        document.getElementById("homepage-div").style.display='none';
     }
     
 
@@ -189,6 +192,7 @@ class LandingPage extends React.Component{
                 <Layout >
                 <Header title=' ' id='header-bar' scroll style={{backgroundImage: 'url(https://www.whiteflowerfarm.com/mas_assets/cache/image/3/9/c/d/14797.Jpg)'}}>
                 {/* <Button id="back" onClick={this.goToHome} style={{display:'block', color: 'white'}}>Home</Button> */}
+                    <Button id="back" onClick={this.goToHome} style={{display:'block', color: 'white'}}>Home</Button>
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
                 </Header>
                 <div id='admin-form' class='admin'>
