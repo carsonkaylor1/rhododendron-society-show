@@ -7,7 +7,11 @@ require('firebase/auth');
 class Awards extends React.Component{
     constructor(props){
         super(props)
+
+        this.goToHome = this.goToHome.bind(this);
     }
+
+    
 
     componentDidMount(){
         const { category } = this.props.location.state;
@@ -15,13 +19,13 @@ class Awards extends React.Component{
         this.queryDatabase(category);
     }
 
-    back(){
-        window.location.pathname = "/landingpage";
-    }
-
     signout(){
         auth.signOut();
         window.location.pathname = "/";
+    }
+
+    goToHome(){
+        this.props.history.push('/landingpage');
     }
 
     queryDatabase(category){
@@ -53,6 +57,9 @@ class Awards extends React.Component{
                 document.getElementById('awards-indicator').style.display = 'block'
                 document.getElementById('awards-div').style.display = 'none'
             }
+        }
+        else{
+            document.getElementById('awards-div').style.display = 'none'
         }
 
 
@@ -117,7 +124,7 @@ class Awards extends React.Component{
             <div>
                 <Layout>
                 <Header title=' ' id='header-bar' scroll style={{backgroundImage: 'url(https://www.whiteflowerfarm.com/mas_assets/cache/image/3/9/c/d/14797.Jpg)'}}>
-                    <Button id="back" onClick={this.back} style={{display:'block', color: 'white'}}>Back</Button>
+                    <Button id="back" onClick={this.goToHome} style={{display:'block', color: 'white'}}>Home</Button>
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
 
                 </Header>

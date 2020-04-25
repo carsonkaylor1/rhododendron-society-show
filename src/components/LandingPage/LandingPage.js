@@ -26,6 +26,7 @@ class LandingPage extends React.Component{
         this.queryDatabase = this.queryDatabase.bind(this);
         this.viewPhotos = this.viewPhotos.bind(this);
         this.setup = this.setup.bind(this);
+        this.goToHome = this.goToHome.bind(this);
     }
 
     setup(user){
@@ -166,9 +167,10 @@ class LandingPage extends React.Component{
         window.location.pathname = "/";
     }
 
-    back(){
-        window.location.pathname = "/landingpage";
+    goToHome(){
+        this.props.history.push('/landingpage');
     }
+    
 
     render(){
         return(
@@ -176,6 +178,7 @@ class LandingPage extends React.Component{
                 
                 <Layout >
                 <Header title=' ' id='header-bar' scroll style={{backgroundImage: 'url(https://www.whiteflowerfarm.com/mas_assets/cache/image/3/9/c/d/14797.Jpg)'}}>
+                <Button id="back" onClick={this.goToHome} style={{display:'block', color: 'white'}}>Home</Button>
                     <Button id="signout" onClick={this.signout} style={{display:'block', color: 'white'}}>Sign Out</Button>
                 </Header>
                 <div id='admin-form' class='admin'>
