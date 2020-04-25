@@ -105,8 +105,8 @@ class Awards extends React.Component{
                 plantName.style.marginTop = '25px';
                 plantName.style.fontSize = '22px';
                 winnerName.style.fontSize = '18px';
-                image.style.width = '750px';
-                image.style.maxHeight = '1500px';
+                image.style.maxWidth = '750px';
+                image.style.maxHeight = '750px';
 
                 document.getElementById('third-place-div').append(image);
                 document.getElementById('third-place-div').append(plantName);
