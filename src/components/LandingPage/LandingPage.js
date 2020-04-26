@@ -144,6 +144,7 @@ class LandingPage extends React.Component{
             else{
                 var noImgTxt = document.createElement('h3')
                 noImgTxt.innerHTML = "No photos uploaded";
+                noImgTxt.fontFamily = 'Merriweather serif';
                 document.getElementById("photo-caption-div").append(noImgTxt);
             }
             
