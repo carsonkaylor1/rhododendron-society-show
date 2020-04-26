@@ -36,6 +36,7 @@ class Awards extends React.Component{
                 var winnerName = document.createElement('p');
                 var image = document.createElement('img');
 
+                document.getElementById('awards-div').style.display = 'block'
                 document.getElementById('awards-indicator').style.display = 'none'
                 document.getElementById('awards-div').style.display = 'block'
                 plantName.innerHTML = ('Plant name: ' + currentObject.author.caption);
@@ -128,7 +129,7 @@ class Awards extends React.Component{
                 </Header>
                 <h1 style={{fontFamily: 'Merriweather serif', textDecoration: 'underline'}}>Awards</h1>
                 <h3 id='awards-indicator' style={{fontFamily: 'Merriweather serif'}}>No Awards Yet</h3>
-                <div id='awards-div'>
+                <div id='awards-div' style={{display:'none'}}>
                 <div id='first-place-div' style={{marginBottom: '100px'}}>
                     <h2 style={{fontFamily: 'Merriweather serif'}}>First Place</h2>
                 </div>
