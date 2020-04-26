@@ -197,7 +197,7 @@ class LandingPage extends React.Component{
                 <Grid>
                     <Cell col={12}>
                         <div className="category-header">
-                            <h1 style={{fontFamily: 'Merriweather serif'}}>Choose Entry Category</h1>
+                            <h1 style={{fontFamily: 'Merriweather serif', marginTop: '50px', fontSize: '64px'}}>Choose Entry Category</h1>
                         </div>
                     </Cell>
                 </Grid>
