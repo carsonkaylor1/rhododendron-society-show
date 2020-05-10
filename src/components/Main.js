@@ -6,6 +6,7 @@ import SignUpPage from './SignUpPage/SignUpPage';
 import Photos from './Photos/Photos';
 import LandingPage from './LandingPage/LandingPage';
 import Awards from './Awards/Awards';
+import SpecialAwards from './SpecialAwards/SpecialAwards'
 
 const Main = () => (
     <Switch>
@@ -15,6 +16,7 @@ const Main = () => (
         <Route exact path='/landingpage' component={LandingPage} />
         {/* <Route exact path='/photos' component={Photos} /> */}
         <Route exact path='/awards' component={Awards} />
+        <Route exact path='/specialawards' component={SpecialAwards} />
     </Switch>
 )
 

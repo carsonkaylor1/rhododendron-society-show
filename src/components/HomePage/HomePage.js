@@ -50,7 +50,7 @@ class HomePage extends React.Component{
     }
 
 
-    getFile(e){
+    getFile(e){ //Fix this so that fileId resets when user presses submit button
         // Get file
         file = e.target.files[0];
         fileId = `image${file.name}`
@@ -100,7 +100,7 @@ class HomePage extends React.Component{
 
             database.ref('/' + this.props.category + '/').once('value', function(snapshot) {
                 const numberOfChildren = (snapshot.numChildren());
-                if(awardsInDB){
+                if(awardsInDB){ //awards take up a spot in the database under category
                     this.setState({
                         numChildren: (numberOfChildren-1)
                     })
@@ -134,6 +134,7 @@ class HomePage extends React.Component{
             })
         }.bind(this)
         );
+        //TODO: file = '' so that user cannot submit photo twice by accident
     }
     catch{  
         var errorMessage = document.createElement('p')

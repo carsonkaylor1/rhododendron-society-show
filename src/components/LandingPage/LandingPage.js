@@ -201,6 +201,11 @@ class LandingPage extends React.Component{
                             <h1 style={{fontFamily: 'Merriweather serif', marginTop: '50px', fontSize: '64px'}}>Choose Entry Category</h1>
                         </div>
                     </Cell>
+                    <Cell col={12}>
+                        <Button colored raised style={{fontFamily:'Quicksand', width:'20%'}}>
+                            <Link to={{pathname: '/specialawards'}} style={{color:'white', textDecoration:'none'}}>Special Awards</Link>
+                        </Button>
+                    </Cell>
                 </Grid>
                     <div id="categories-grid" style={{marginBottom:'50px'}}>
 
